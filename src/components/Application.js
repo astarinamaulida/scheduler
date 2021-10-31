@@ -5,6 +5,7 @@ import "components/Application.scss";
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment"
 import { getAppointmentsForDay } from "helpers/selectors";
+import { getInterviewersForDay } from "helpers/selectors";
 import { getInterview } from "helpers/selectors";
 
 // MOCK DATA FOR APPOINTMENTS
@@ -78,16 +79,18 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
 
+  const interviewers = getInterviewersForDay(state, state.day);
   const appointments = getAppointmentsForDay(state, state.day);
   const appointmentList = appointments.map((appointment) => {
-    // Another way to spread object into props definition
-    // Same as key={appointment.id} id={appointment.id}, etc.
+    const interview = getInterview(state, appointment.interview)
+   console.log(interviewers)
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        interview={getInterview(state, appointment.interview)}
+        interview={interview}
+        interviewers={interviewers}
         />
     )
   })
@@ -102,7 +105,7 @@ export default function Application(props) {
       setState(prev => ({ ...prev,
         days: response[0].data,
         appointments: response[1].data,
-        interviewers: response[2]
+        interviewers: response[2].data
       }))
     });
   }, []);

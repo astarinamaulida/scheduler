@@ -11,6 +11,22 @@ export function getAppointmentsForDay(state, day) {
   return [];
 }
 
+
+// Returns interviewers for that day
+export function getInterviewersForDay(state, day) {
+  console.log(state)
+  console.log(day)
+  for (let i = 0; i < state.days.length; i++) {
+    if (state.days[i].name === day) {
+      return state.days[i].interviewers.map((interviewer) => {
+        return state.interviewers[interviewer];
+      });
+    }
+  }
+
+  return [];
+}
+
 // Returns an object that contains the interview data
 // when we pass it an object that contains the interviewer
 // null if no interview
