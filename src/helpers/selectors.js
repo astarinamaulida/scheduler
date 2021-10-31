@@ -2,19 +2,15 @@ import InterviewerList from "components/InterviewerList";
 
 // Returns an array of appointments for that day
 export function getAppointmentsForDay(state, day) {
-  let result = [];
-  const allowed = state.days.filter(eachDay => eachDay.name === day);
-
-  for (let i of allowed) {
-    for (let j = 0; j < i.appointments.length; j++) {
-      let vv = i.appointments[j];
-      if (state.appointments[vv]) {
-        result.push(state.appointments[vv]);
-      }
+  
+  for (let i = 0; i < state.days.length; i++) {
+    if (state.days[i].name === day) {
+      return state.days[i].appointments.map((appointment) => {return state.appointments[appointment]
+      })
     }
   }
-  console.log("result: ", result);
-  return result;
+  return [];
+
 }
 
 

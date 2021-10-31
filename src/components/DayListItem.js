@@ -12,7 +12,9 @@ export default function DayListItem(props){
   };
 
   // Assign class based on props
-  const dayClass =  classNames("day-list__item", {
+  const dayClass =  classNames({
+    dayClass: true,
+    "day-list__item": true,
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0, // spots 0 means full
  });
@@ -20,7 +22,8 @@ export default function DayListItem(props){
   return (
     <li 
       className={dayClass}
-      onClick={() => props.setDay(props.name)}  
+      onClick={() => props.setDay(props.name)} 
+      selected={props.selected}
     >
       <h2 className="text--regular">{props.name}</h2>
       <h3 className="text--light">{formatSpots(props)} remaining</h3>

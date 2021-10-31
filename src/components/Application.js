@@ -45,21 +45,40 @@ import { getInterview } from "helpers/selectors";
     id: 5,
     time: "4pm",
   }
-]; */
+];
+
+  const days = [
+   {
+     id: 1,
+     name: "Monday",
+     spots: 2,
+   },
+   {
+     id: 2,
+     name: "Tuesday",
+     spots: 5,
+   },
+   {
+     id: 3,
+     name: "Wednesday",
+     spots: 0,
+   },
+ ]; */
 
 // FUNCTION APPLICATION
 
 export default function Application(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
-  console.log(state.interviewers);
+  const setDay = day => setState({ ...state, day });
 
   const appointments = getAppointmentsForDay(state, state.day);
-
   const appointmentList = appointments.map((appointment) => {
     // Another way to spread object into props definition
     // Same as key={appointment.id} id={appointment.id}, etc.
@@ -73,19 +92,17 @@ export default function Application(props) {
     )
   })
 
-  const setDay = day => setState({ ...state, day });
-
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
-      /* axios.get('http://localhost:8001/api/interviewers')  */
+      axios.get('http://localhost:8001/api/interviewers')
     ]).then(response => {
-      setState(prev => ({
-        ...prev,
+      console.log(response)
+      setState(prev => ({ ...prev,
         days: response[0].data,
         appointments: response[1].data,
-        /*  interviewers: response[2] */
+        interviewers: response[2]
       }))
     });
   }, []);
