@@ -1,0 +1,74 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+export default function useApplicationData() {
+
+  useEffect(() => {
+    Promise.all([
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments'),
+      axios.get('http://localhost:8001/api/interviewers')
+    ]).then(response => {
+      console.log(response)
+      setState(prev => ({
+        ...prev,
+        days: response[0].data,
+        appointments: response[1].data,
+        interviewers: response[2].data
+      }))
+    });
+  }, []);
+
+  const setDay = day => setState({ ...state, day });
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {},
+    interviewers: {}
+  });
+
+
+  // Book new interview appointment
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // PUT reguest to the endpoint to update the database with interview data
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then((res) => {
+        setState({
+          ...state,
+          appointments,
+        });
+      });
+  };
+
+  // Cancel interview appointment
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // DELETE reguest to the endpoint to delete the interview data
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((es) => {
+        setState({
+          ...state,
+          appointments,
+        });
+      });
+  };
+  return { state, setDay, bookInterview, cancelInterview }
+};
