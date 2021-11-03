@@ -3,6 +3,15 @@ import axios from "axios";
 
 export default function useApplicationData() {
   
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {},
+    interviewers: {}
+  });
+
+  const setDay = day => setState({ ...state, day });
+
   // Getting data days, appointments and interviewers from API axios
   useEffect(() => {
     Promise.all([
@@ -10,7 +19,6 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then(response => {
-      console.log(response)
       setState(prev => ({
         ...prev,
         days: response[0].data,
@@ -19,15 +27,6 @@ export default function useApplicationData() {
       }))
     });
   }, []);
-
-  const setDay = day => setState({ ...state, day });
-
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {},
-    interviewers: {}
-  });
 
   // Book new interview appointment
   function bookInterview(id, interview) {
@@ -41,12 +40,12 @@ export default function useApplicationData() {
     };
 
      // Update the days to increase interview spots when the interview being canceled/deleted
-     let days = state.day
+     let days = state.days
      if (!state.appointments[id].interview) {
       days = state.days.map((day) => {
         const updatedDay = {...day};
         if (updatedDay.appointments.includes(id)){
-          updatedDay.spots --
+          updatedDay.spots--;
           return updatedDay
         } else {
           return updatedDay

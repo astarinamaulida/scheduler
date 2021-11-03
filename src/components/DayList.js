@@ -3,9 +3,8 @@ import DayListItem from "./DayListItem";
 
 export default function DayList(props) {
   // Map over days array to return <DayListItem> components as children
-  const daylistitem = props.days.map((day) => {
-  return (
-    <ul>
+  const days = props.days.map((day) => {
+    return (
       <DayListItem
         key={day.id}
         name={day.name}
@@ -13,8 +12,7 @@ export default function DayList(props) {
         selected={day.name === props.value}
         setDay={props.onChange}
       />
-    </ul>
-  );
-});
-return daylistitem;
-}
+    );
+  });
+  return days;
+};

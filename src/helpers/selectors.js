@@ -14,8 +14,6 @@ export function getAppointmentsForDay(state, day) {
 
 // Returns interviewers for that day
 export function getInterviewersForDay(state, day) {
-  console.log(state)
-  console.log(day)
   for (let i = 0; i < state.days.length; i++) {
     if (state.days[i].name === day) {
       return state.days[i].interviewers.map((interviewer) => {
