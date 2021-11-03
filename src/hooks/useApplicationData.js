@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
-
+  
+  // Getting data days, appointments and interviewers from API axios
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
@@ -28,7 +29,6 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-
   // Book new interview appointment
   function bookInterview(id, interview) {
     const appointment = {
@@ -39,13 +39,26 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    // PUT reguest to the endpoint to update the database with interview data
+
+     // Update the days to increase interview spots when the interview being canceled/deleted
+     const days = state.days.map((day) => {
+      const updatedDay = {...day};
+      if (updatedDay.appointments.includes(id)){
+        updatedDay.spots--
+        return updatedDay
+      } else {
+        return updatedDay
+      }
+    })
+
+    // PUT request to the endpoint to update the database with interview data
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
         setState({
           ...state,
           appointments,
+          days
         });
       });
   };
@@ -60,6 +73,18 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+
+    // Update the days to increase interview spots when the interview being canceled/deleted
+    const days = state.days.map((day) => {
+      const updatedDay = {...day};
+      if (updatedDay.appointments.includes(id)){
+        updatedDay.spots++
+        return updatedDay
+      } else {
+        return updatedDay
+      }
+    })
+
     // DELETE reguest to the endpoint to delete the interview data
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
@@ -67,6 +92,7 @@ export default function useApplicationData() {
         setState({
           ...state,
           appointments,
+          days
         });
       });
   };
