@@ -41,15 +41,18 @@ export default function useApplicationData() {
     };
 
      // Update the days to increase interview spots when the interview being canceled/deleted
-     const days = state.days.map((day) => {
-      const updatedDay = {...day};
-      if (updatedDay.appointments.includes(id)){
-        updatedDay.spots--
-        return updatedDay
-      } else {
-        return updatedDay
-      }
-    })
+     let days = state.day
+     if (!state.appointments[id].interview) {
+      days = state.days.map((day) => {
+        const updatedDay = {...day};
+        if (updatedDay.appointments.includes(id)){
+          updatedDay.spots --
+          return updatedDay
+        } else {
+          return updatedDay
+        }
+      })
+    }
 
     // PUT request to the endpoint to update the database with interview data
     return axios
