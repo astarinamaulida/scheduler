@@ -14,6 +14,14 @@ Nice!
 
 ## Demo
 
+*Create new appointment. The warning message shows that the student name cannot be blank.*
+
+!["New Appointment"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler-newappointment.gif?raw=true)
+
+
+
+*Editing and deleting the appointment*
+!["Editing and Deleting"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler-editdelete.gif?raw=true)
 
 
 ## Setup
