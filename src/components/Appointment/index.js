@@ -70,5 +70,5 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && <Error message="Error saving appointment" onClose={() => back()}/>}
       {mode === ERROR_DELETE && <Error message= 'Error deleting appointment' onClose={() => back()}/>}
     </article>
-  )
-}
+  );
+};

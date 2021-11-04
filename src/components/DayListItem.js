@@ -8,7 +8,7 @@ export default function DayListItem(props){
       case 0: return "no spots";
       case 1: return "1 spot";
       default: return `${props.spots} spots`                                              
-    }
+    };
   };
 
   // Assign class based on props
@@ -30,4 +30,4 @@ export default function DayListItem(props){
       <h3 className="text--light">{formatSpots(props)} remaining</h3>
     </li>
   );
-}
+};

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
-  
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -39,19 +39,19 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-     // Update the days to increase interview spots when the interview being canceled/deleted
-     let days = state.days
-     if (!state.appointments[id].interview) {
+    // Update the days to increase interview spots when the interview being canceled/deleted
+    let days = state.days
+    if (!state.appointments[id].interview) {
       days = state.days.map((day) => {
-        const updatedDay = {...day};
-        if (updatedDay.appointments.includes(id)){
+        const updatedDay = { ...day };
+        if (updatedDay.appointments.includes(id)) {
           updatedDay.spots--;
           return updatedDay
         } else {
           return updatedDay
-        }
-      })
-    }
+        };
+      });
+    };
 
     // PUT request to the endpoint to update the database with interview data
     return axios
@@ -78,14 +78,14 @@ export default function useApplicationData() {
 
     // Update the days to increase interview spots when the interview being canceled/deleted
     const days = state.days.map((day) => {
-      const updatedDay = {...day};
-      if (updatedDay.appointments.includes(id)){
+      const updatedDay = { ...day };
+      if (updatedDay.appointments.includes(id)) {
         updatedDay.spots++
         return updatedDay
       } else {
         return updatedDay
-      }
-    })
+      };
+    });
 
     // DELETE reguest to the endpoint to delete the interview data
     return axios

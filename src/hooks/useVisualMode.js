@@ -11,7 +11,7 @@ export default function useVisualMode(initial) {
       setMode(newMode)
     }
     setMode(newMode)
-  }
+  };
 
   // Set the previous mode then remove the last one from history
   function back () {
@@ -19,8 +19,8 @@ export default function useVisualMode(initial) {
       const newHistory = history.slice(0, -1)
       setHistory(newHistory);
       setMode(newHistory[newHistory.length - 1]);
-    }
-  } 
+    };
+  };
 
   return { mode, transition, back };
-}
+};

@@ -24,8 +24,8 @@ export default function InterviewerList(props) {
       <h4 className="interviewers__header text--light">Interviewer</h4>
       <ul className="interviewers__list">{interviewers}</ul>
     </section>
-  )
-}
+  );
+};
 
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired
