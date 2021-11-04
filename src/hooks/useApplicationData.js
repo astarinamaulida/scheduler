@@ -24,7 +24,7 @@ export default function useApplicationData() {
         days: response[0].data,
         appointments: response[1].data,
         interviewers: response[2].data
-      }))
+      }));
     });
   }, []);
 
@@ -80,7 +80,7 @@ export default function useApplicationData() {
     const days = state.days.map((day) => {
       const updatedDay = { ...day };
       if (updatedDay.appointments.includes(id)) {
-        updatedDay.spots++
+        updatedDay.spots++;
         return updatedDay
       } else {
         return updatedDay
