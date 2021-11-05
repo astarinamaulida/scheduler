@@ -13,16 +13,17 @@ The student can also delete the appointment by clicking the delete button.
 Before deletion, the app will ask for final confirmation if the student wants to delete it.
 So cool!
 
+
 ## Demo
 
 *Create new appointment. The warning message shows that the student name cannot be blank.*
 
-!["New Appointment"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler-newappointment.gif?raw=true)
+!["New Appointment"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler_newappointment.gif?raw=true)
 
 
 
 *Editing and deleting the appointment*
-!["Editing and Deleting"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler-editdelete.gif?raw=true)
+!["Editing and Deleting"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler_editdelete.gif?raw=true)
 
 
 ## Setup
