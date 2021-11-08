@@ -23,11 +23,13 @@ So cool!
 
 
 *Editing the appointment*
+
 !["Editing Appointment"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler_edit.gif?raw=true)
 
 
 
 *Deleting the appointment*
+
 !["Deleting Appointment"](https://github.com/astarinamaulida/scheduler/blob/master/public/GIF/scheduler_delete.gif?raw=true)
 
 
